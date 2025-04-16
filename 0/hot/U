@@ -25,7 +25,7 @@ boundaryField
 	{
 		type	noSlip;
 	}
-	interface
+	hot_to_cold
 	{
 		type	noSlip;
 	}

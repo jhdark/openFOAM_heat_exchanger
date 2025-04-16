@@ -24,7 +24,7 @@ boundaryField
 	{
 		type	fixedFluxPressure;
 	}
-	interface
+	hot_to_cold
 	{
 		type	fixedFluxPressure;
 	}
