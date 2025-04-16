@@ -1,0 +1,39 @@
+FoamFile
+{
+	version	2.0;
+	format	binary;
+	class	volScalarField;
+	location	"0/cold";
+	object	T;
+	arch	"LSB;label=32;scalar=64";
+}
+dimensions	[0 0 0 1 0 0 0];
+internalField	uniform 283;
+boundaryField
+{
+	cold_outlet
+	{
+		type	zeroGradient;
+	}
+	cold_inlet
+	{
+		type	fixedValue;
+		value	uniform 283;
+	}
+	defaultFaces
+	{
+		type	zeroGradient;
+	}
+	interface
+	{
+		type	compressible::turbulentTemperatureCoupledBaffleMixed;
+		value	uniform 283;
+		kappaMethod	fluidThermo;
+		kappa	none;
+		neighbourFieldName	T;
+		Tnbr	T;
+		alphaAni	Anialpha;
+		thicknessLayers	(0.005);
+		kappaLayers	(385.0);
+	}
+}
