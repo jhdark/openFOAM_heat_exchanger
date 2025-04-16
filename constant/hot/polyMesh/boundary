@@ -39,12 +39,13 @@ FoamFile
     hot_to_cold
     {
         type            mappedWall;
-        inGroups        1(wall);
         nFaces          26607;
         startFace       495167;
         sampleMode      nearestPatchFace;
         sampleRegion    cold;
-        samplePatch     cold_to_hot;
+        samplePatch     interface;
+        offsetMode	uniform;
+		offset	(0 0 0);
     }
 )
 
