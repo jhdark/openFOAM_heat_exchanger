@@ -1,0 +1,35 @@
+FoamFile
+{
+	version	2.0;
+	format	ascii;
+	class	dictionary;
+	location	"system";
+	object	createPatchDict;
+}
+pointSync	false;
+patches	(
+	{
+        name	cold_to_hot;
+        patchInfo
+        {
+            type	mappedWall;
+            sampleMode      nearestPatchFace;
+            sampleRegion    cold;
+            samplePatch     cold_to_hot;
+        }
+        constructFrom	patches;
+        patches	(interface);
+    }
+    {
+        name	hot_to_cold;
+        patchInfo
+        {
+            type	mappedWall;
+            sampleMode      nearestPatchFace;
+            sampleRegion    hot;
+            samplePatch     hot_to_cold;
+        }
+        constructFrom	patches;
+        patches	(interface);
+    }
+);
