@@ -1,0 +1,49 @@
+FoamFile
+{
+	version	2.0;
+	class	dictionary;
+	format	ascii;
+	location	"constant/hot";
+	object	radiationProperties;
+}
+radiation	false;
+solverFreq	5;
+radiationModel	none;
+absorptionEmissionModel	none;
+scatterModel	none;
+transmissivityModel	none;
+useSolarLoad	false;
+solarLoadCoeffs
+{
+	sunDirectionModel	sunDirConstant;
+	sunDirection	(0 0 -1);
+	sunLoadModel	sunLoadConstant;
+	directSolarRad	1000.0;
+	diffuseSolarRad	0.0;
+	C	0.0;
+	useVFbeamToDiffuse	false;
+	spectralDistribution	(1);
+	wallCoupled	true;
+	solidCoupled	false;
+	useReflectedRays	true;
+	reflecting
+	{
+	}
+}
+solarLoarCoeffs
+{
+	sunDirectionModel	sunDirConstant;
+	sunDirection	(0 0 -1);
+	sunLoadModel	sunLoadConstant;
+	directSolarRad	1000.0;
+	diffuseSolarRad	0.0;
+	C	0.0;
+	useVFbeamToDiffuse	false;
+	spectralDistribution	(1);
+	wallCoupled	true;
+	solidCoupled	false;
+	useReflectedRays	true;
+	reflecting
+	{
+	}
+}
