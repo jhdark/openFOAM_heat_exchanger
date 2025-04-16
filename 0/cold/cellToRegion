@@ -34,7 +34,7 @@ boundaryField
     {
         type            zeroGradient;
     }
-    cold_to_hot
+    interface
     {
         type            calculated;
         value           uniform 0;
