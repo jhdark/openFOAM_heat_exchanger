@@ -8,7 +8,7 @@ FoamFile
 }
 application	chtMultiRegionSimpleFoam;
 deltaT	1;
-endTime	200;
+endTime	700;
 purgeWrite	0;
 startFrom	latestTime;
 startTime	0;
