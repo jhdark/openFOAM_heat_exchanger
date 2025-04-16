@@ -26,14 +26,10 @@ boundaryField
 	}
 	interface
 	{
-		type	compressible::turbulentTemperatureCoupledBaffleMixed;
-		value	uniform 283;
-		kappaMethod	fluidThermo;
-		kappa	none;
-		neighbourFieldName	T;
-		Tnbr	T;
-		alphaAni	Anialpha;
-		thicknessLayers	(0.005);
-		kappaLayers	(385.0);
+		type            compressible::turbulentTemperatureCoupledBaffleMixed;
+		value           uniform 300;
+		Tnbr            T;
+		kappaMethod     fluidThermo;
+		kappa           none;
 	}
 }
