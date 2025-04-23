@@ -1,0 +1,34 @@
+FoamFile
+{
+	version	2.0;
+	format	binary;
+	class	volScalarField;
+	location	"0/cold";
+	object	p;
+	arch	"LSB;label=32;scalar=64";
+}
+dimensions	[1 -1 -2 0 0 0 0];
+internalField	uniform 100000;
+boundaryField
+{
+	cold_inlet
+	{
+		type	calculated;
+		value	uniform 100000;
+	}
+	cold_outlet
+	{
+		type	calculated;
+		value	uniform 100000;
+	}
+	defaultFaces
+	{
+		type	calculated;
+		value	uniform 100000;
+	}
+	interface
+	{
+		type	calculated;
+		value	uniform 100000;
+	}
+}
