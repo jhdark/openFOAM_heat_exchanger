@@ -61,53 +61,6 @@ def export_openfoam_data(T_cold, T_hot, u_cold, u_hot):
     writer_u_hot.write(t=0)
 
 
-def interpolate_temperature_fields(T_cold, T_hot):
-    """
-    Interpolate temperature fields onto a single function.
-    """
-
-    print("Interpolating temperature fields...")
-    my_mesh = F.MeshFromXDMF(
-        volume_file="mesh_files/mesh_domains.xdmf",
-        facet_file="mesh_files/mesh_boundaries.xdmf",
-    )
-    volume_meshtags = my_mesh.define_volume_meshtags()
-
-    T_ele = basix.ufl.element(
-        basix.ElementFamily.P,
-        my_mesh.mesh.basix_cell(),
-        1,
-        basix.LagrangeVariant.equispaced,
-    )
-    V = fem.functionspace(my_mesh.mesh, T_ele)
-    my_temperature_field = fem.Function(V)
-
-    print("Interpolating hot field")
-    nmm_interpolate(
-        my_temperature_field, T_hot, cells=volume_meshtags.find(6), padding=1e-4
-    )
-
-    print("Interpolating cold field")
-    nmm_interpolate(
-        my_temperature_field, T_cold, cells=volume_meshtags.find(7), padding=1e-4
-    )
-    adios4dolfinx.write_mesh("results/temperature_field_combined.bp", mesh=my_mesh.mesh)
-    adios4dolfinx.write_function(
-        filename="results/temperature_field_combined.bp",
-        u=my_temperature_field,
-        time=0.0,
-        name="T",
-    )
-
-    writer = VTXWriter(
-        MPI.COMM_WORLD,
-        "results/temperature_field_combined_example.bp",
-        my_temperature_field,
-        "BP5",
-    )
-    writer.write(t=0)
-
-
 def build_festim_model(T_cold, T_hot, u_cold, u_hot):
     print("Building FESTIM model...")
     id_hot = 6
@@ -185,8 +138,6 @@ if __name__ == "__main__":
     T_cold, T_hot, u_cold, u_hot = read_openfoam_data()
 
     # export_openfoam_data(T_cold, T_hot, u_cold, u_hot)
-
-    # interpolate_temperature_fields(T_cold, T_hot)
 
     # build FESTIM model
     my_model = build_festim_model(T_cold, T_hot, u_cold, u_hot)
