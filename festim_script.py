@@ -2,10 +2,6 @@ import festim as F
 from foam2dolfinx import OpenFOAMReader
 from dolfinx import fem
 from festim.helpers import nmm_interpolate
-from dolfinx.io import VTXWriter
-from mpi4py import MPI
-import adios4dolfinx
-from dolfinx import log
 
 
 def read_openfoam_data():
@@ -22,43 +18,6 @@ def read_openfoam_data():
     u_hot = openfoam_reader.create_dolfinx_function(t=700, name="U", subdomain="hot")
 
     return T_cold, T_hot, u_cold, u_hot
-
-
-def export_openfoam_data(T_cold, T_hot, u_cold, u_hot):
-    """
-    Export OpenFOAM data to VTX files.
-    """
-
-    print("Exporting OpenFOAM data")
-    writer_T_cold = VTXWriter(
-        MPI.COMM_WORLD,
-        "openfoam_data/temperature_cold.bp",
-        T_cold,
-        "BP5",
-    )
-    writer_T_hot = VTXWriter(
-        MPI.COMM_WORLD,
-        "openfoam_data/temperature_hot.bp",
-        T_hot,
-        "BP5",
-    )
-    writer_u_cold = VTXWriter(
-        MPI.COMM_WORLD,
-        "openfoam_data/u_cold.bp",
-        u_cold,
-        "BP5",
-    )
-    writer_u_hot = VTXWriter(
-        MPI.COMM_WORLD,
-        "openfoam_data/u_hot.bp",
-        u_hot,
-        "BP5",
-    )
-
-    writer_T_cold.write(t=0)
-    writer_T_hot.write(t=0)
-    writer_u_cold.write(t=0)
-    writer_u_hot.write(t=0)
 
 
 def build_festim_model(T_cold, T_hot, u_cold, u_hot):
@@ -137,12 +96,8 @@ if __name__ == "__main__":
     # read openfoam data
     T_cold, T_hot, u_cold, u_hot = read_openfoam_data()
 
-    # export_openfoam_data(T_cold, T_hot, u_cold, u_hot)
-
     # build FESTIM model
     my_model = build_festim_model(T_cold, T_hot, u_cold, u_hot)
-
-    # log.set_log_level(log.LogLevel.INFO)
 
     my_model.initialise()
     my_model.run()
