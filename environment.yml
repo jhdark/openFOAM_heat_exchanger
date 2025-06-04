@@ -1,0 +1,12 @@
+name: foam_festim_coupling_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - numpy
+  - matplotlib
+  - festim=2.0a4
+  - pip
+  - pip:
+    - git+https://github.com/festim-dev/openmc2dolfinx
