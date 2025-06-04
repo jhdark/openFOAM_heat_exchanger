@@ -1,6 +1,6 @@
 # OpenFOAM–FESTIM Heat Exchanger Demo
 
-This repository demonstrates the coupling of [OpenFOAM](https://www.openfoam.com/) with [FESTIM](https://github.com/festim-dev/festim) for multiphysics simulations of a heat exchanger. OpenFOAM is used for the thermal-hydraulic analysis, and the results are then mapped to FESTIM for tritium transport modelling.
+This repository demonstrates the coupling of [OpenFOAM](https://www.openfoam.com/) with [FESTIM](https://github.com/festim-dev/festim) for multiphysics simulations of a heat exchanger. OpenFOAM is used for the thermal-hydraulic analysis, and the results are then mapped to FESTIM for hydrogen transport modelling using [foam2dolfinx](https://github.com/festim-dev/foam2dolfinx).
 
 ### Heat exchanger model:
 
@@ -58,6 +58,9 @@ sudo apt install openfoam2412
 
 # Source the environment (add to ~/.bashrc if needed)
 source /usr/lib/openfoam/openfoam2412/etc/bashrc
+
+# initialise openfoam
+openfoam2412
 ```
 
 ## 2. Running the OpenFOAM Case
